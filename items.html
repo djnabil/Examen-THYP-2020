@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="X-UA-Compatible" content="IE-edge">
+		<meta charset="utf-8">
+		<title>Items</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		
+	    <!-- Bootstrap CSS -->
+	    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+		<script src="https://d3js.org/d3.v4.min.js"></script>
+        <script src="js/data.js"></script>
+	</head>
+
+	<body>
+        <div class="jumbotron mb-0" style="background-color:#A5DF00 !important">
+            <h1 class="display-3">Examen THYP du 7 décembre 2020</h1>
+            <h2>Promotion 2020 - 2021</h2>  
+        </div>
+        <h5 class="container">Item étudiant</h5>
+        <div id="item"></div>
+
+        <script>
+            
+            let item = new data({
+                cont: "#item",
+                apiUrl: "https://polemika.univ-paris8.fr/omk/api/items?item_set_id=2"
+            })
+
+            item.getData();
+        </script>
+	</body>
+ </html>
