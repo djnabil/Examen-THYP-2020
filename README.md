@@ -6,7 +6,7 @@
 
 ## Thierry WEN
 
-Lien README.md : https://github.com/Yrrieth/Examen-THYP-2020
+Lien README.md :  https://yrrieth.github.io/Examen-THYP-2020
 
 Lien index.html : https://yrrieth.github.io/Examen-THYP-2020/index.html
 
