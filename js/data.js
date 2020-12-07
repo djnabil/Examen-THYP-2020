@@ -16,12 +16,50 @@ class data {
             return dataItems;
         }
 
+        // Enlève les doublons
+        function setData (data) {
+            var dataDoublon = [];
+            var dataSansDoublon = [];
+            console.log(data);
+            data.forEach(d => {
+                dataDoublon.push(d["dcterms:subject"][0]["@value"]);
+            });
+
+            dataDoublon.forEach(d => {
+                if (dataSansDoublon.indexOf(d) === -1) {
+                    dataSansDoublon.push(d);
+                }
+            })
+            return dataSansDoublon;
+        }
+
         function showSujets(data) {
             var dataItems = selectData(data);
+            var dataSansDoublon = setData(dataItems);
 
-            let contSlct = d3.select("#"+idCont);
-            contSlct.append('label').attr('for','slctApi').html('Choisir une api :');
-            let slct = contSlct.append('select')
+            var contSelect = d3.select(me.cont)
+                .append("div")
+                .attr("class", "container")
+            
+            var label = contSelect.append("label")
+                .attr("for", "selectSujets")
+                .html("Choisissez un sujet : ")
+            
+            var select = contSelect.append("select")
+                .attr("name", "sujet")
+                .attr("id", "selectSujets")
+                .selectAll("option")
+                .data(dataSansDoublon)
+                .enter()
+                .append("option")
+                .attr("value", d => {
+                    return d;
+                })
+                .html(d => {
+                    return d;
+                })
+
+            /*let slct = contSlct.append('select')
                 .attr('id','slctApi')
                 .attr('name','apis')                    
                 .on('change',function(d){
@@ -35,7 +73,7 @@ class data {
                 .attr('id',d=>{
                     return d.url;
                 })
-                .html(d=>d.titre);
+                .html(d=>d.titre);*/
         }
 
         function showItems(data) {
