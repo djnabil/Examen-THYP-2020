@@ -38,6 +38,30 @@ class data {
             var dataSansDoublon = setData(dataItems);
 
             var contSelect = d3.select(me.cont)
+            .append("div")
+            .attr("class", "dropdown")
+
+            var button = contSelect.append("button")
+                .attr("class", "btn-primary dropdown-toggle")
+                .attr("type", "button")
+                .attr("data-toggle", "dropdown")
+                .html("Sujet");
+
+            var dropdownMenu = contSelect.append("div")
+                .attr("class", "dropdown-menu")
+                .selectAll("a")
+                .data(dataSansDoublon)
+                .enter()
+                .append("a")
+                .attr("class", "dropdown-item")
+                .on("click", d => {
+                    console.log(d);
+                    showFiltreItems(d);
+                })
+                .html(d => {
+                    return d;
+                })
+            /*var contSelect = d3.select(me.cont)
                 .append("div")
                 .attr("class", "container")
             
@@ -48,6 +72,10 @@ class data {
             var select = contSelect.append("select")
                 .attr("name", "sujet")
                 .attr("id", "selectSujets")
+                .on("change", function(d) {
+                    var items = document.getElementsByClassName("card");
+                    console.log(items);
+                })
                 .selectAll("option")
                 .data(dataSansDoublon)
                 .enter()
@@ -57,27 +85,13 @@ class data {
                 })
                 .html(d => {
                     return d;
-                })
-
-            /*let slct = contSlct.append('select')
-                .attr('id','slctApi')
-                .attr('name','apis')                    
-                .on('change',function(d){
-                    let url = this.options[this.selectedIndex].id;
-                    me.apiUrl = url;
-                    me.cont.select('h1').remove();
-                    me.cont.selectAll('table').remove();        
-                    if(fctEnd)fctEnd(idCont,me.showData);
-                });
-            slct.selectAll('option').data(me.apiUrls).enter().append('option')
-                .attr('id',d=>{
-                    return d.url;
-                })
-                .html(d=>d.titre);*/
+                })*/
         }
 
         function showFiltreItems (data) {
             showItems(data);
+            var cards = document.getElementsByClassName("card")
+            //if ()
         }
 
         function showItems(data) {
