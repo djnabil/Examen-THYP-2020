@@ -61,6 +61,14 @@ class data {
                 .html(d => {
                     return d;
                 })
+
+            var dropdownTous = dropdownMenu.append("a")
+                .attr("class", "dropdown-item")
+                .on("click", d => {
+                    console.log(d);
+                    showFiltreItems(d);
+                })
+                .html("Tous")
             /*var contSelect = d3.select(me.cont)
                 .append("div")
                 .attr("class", "container")
