@@ -6,4 +6,6 @@
 
 ## Thierry WEN
 
-[Lien github pages](https://yrrieth.github.io/Examen-THYP-2020/)
+[Lien index.html](https://yrrieth.github.io/Examen-THYP-2020/index.html)
+
+[Lien items.html](https://yrrieth.github.io/Examen-THYP-2020/items.html)
