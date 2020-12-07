@@ -3,18 +3,9 @@ class data {
         var me = this;
         this.cont = params.cont ? params.cont : d3.select('body');
         this.apiUrl = params.apiUrl ? params.apiUrl : false;
-        this.waitUrl = params.waitUrl ? params.waitUrl : false;
-        this.data = params.data ? params.data : {}; 
-        this.idVocab = 0;
-        var vocab, tables, classes, properties, items=[], omekaQuery=[],divWait
-        , propsForOmekaType = {
-            'o:ResourceClass':['@id','o:id','o:label','o:term']
-            ,'o:Property':['@id','o:id','o:label','o:term']
-            ,'o:Item':['@id','o:id','o:title','o:resource_class','properties']
-        };
+        this.mode = params.mode ? params.mode : false;
 
-        function showItems(data) {
-
+        function selectData (data) {
             if (data[0].length > 1) {
                 // Dans le cas d'un array contenant plusieurs item
                 var dataItems = data[0];
@@ -22,6 +13,34 @@ class data {
                 // Dans le cas d'un item unique
                 var dataItems = data;
             }
+            return dataItems;
+        }
+
+        function showSujets(data) {
+            var dataItems = selectData(data);
+
+            let contSlct = d3.select("#"+idCont);
+            contSlct.append('label').attr('for','slctApi').html('Choisir une api :');
+            let slct = contSlct.append('select')
+                .attr('id','slctApi')
+                .attr('name','apis')                    
+                .on('change',function(d){
+                    let url = this.options[this.selectedIndex].id;
+                    me.apiUrl = url;
+                    me.cont.select('h1').remove();
+                    me.cont.selectAll('table').remove();        
+                    if(fctEnd)fctEnd(idCont,me.showData);
+                });
+            slct.selectAll('option').data(me.apiUrls).enter().append('option')
+                .attr('id',d=>{
+                    return d.url;
+                })
+                .html(d=>d.titre);
+        }
+
+        function showItems(data) {
+
+            var dataItems = selectData(data);
 
             var cards = d3.select(me.cont)
                 .attr("class", "container justify-content-around")
@@ -59,7 +78,13 @@ class data {
             .awaitAll(function(error, results) {
                 if (error) throw error;
                 console.log(results);
-                showItems(results);    
+
+                if (me.mode == "showItems") {
+                    showItems(results);
+                } else if (me.mode == "showSujets") {
+                    showSujets(results);
+                }
+                
             });
         }
 
