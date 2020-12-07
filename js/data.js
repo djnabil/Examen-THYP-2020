@@ -76,6 +76,10 @@ class data {
                 .html(d=>d.titre);*/
         }
 
+        function showFiltreItems (data) {
+            showItems(data);
+        }
+
         function showItems(data) {
 
             var dataItems = selectData(data);
@@ -121,6 +125,7 @@ class data {
                     showItems(results);
                 } else if (me.mode == "showSujets") {
                     showSujets(results);
+                    showFiltreItems(results);
                 }
                 
             });
